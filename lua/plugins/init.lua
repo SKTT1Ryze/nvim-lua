@@ -45,7 +45,7 @@ function Plugins:config()
   -- Others
   Plug('nvim-treesitter/nvim-treesitter')
   Plug('nvim-treesitter/nvim-treesitter-context')
-
+  Plug('akinsho/toggleterm.nvim', {['tag'] = '*'})
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
@@ -54,6 +54,7 @@ function Plugins:config()
   require('plugins.colorscheme').config()
   require('plugins.coc_nvim').config()
   require('plugins.treesitter_context').config()
+  require('plugins.toggleterm_').config()
 end
 
 return Plugins
