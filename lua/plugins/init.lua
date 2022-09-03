@@ -42,6 +42,10 @@ function Plugins:config()
   -- Lsp
   Plug('neoclide/coc.nvim', {['branch'] = 'release'})
 
+  -- Others
+  Plug('nvim-treesitter/nvim-treesitter')
+  Plug('nvim-treesitter/nvim-treesitter-context')
+
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
@@ -49,6 +53,7 @@ function Plugins:config()
   require('plugins.leaderf').config()
   require('plugins.colorscheme').config()
   require('plugins.coc_nvim').config()
+  require('plugins.treesitter_context').config()
 end
 
 return Plugins
