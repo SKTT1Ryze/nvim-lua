@@ -1,0 +1,31 @@
+{
+  "Lua.telemetry.enable": true,
+  "languageserver": {
+      "ccls": {
+        "command": "ccls",
+        "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+        "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+        "initializationOptions": {
+          "highlight": {"lsRanges": true},
+          "cache": {
+           "directory": "/tmp/ccls"
+         },
+         "completion": {
+           "detailedLable": true,
+            "placeholder": true
+          },
+          "index": {
+           "onChange": false,
+           "initialNoLinkage": true,
+           "threads": 2
+         },
+         "compilationDatabaseDirectory": ".vscode/"
+       }
+      },
+      "golang": {
+        "command": "gopls",
+       "rootPatterns": ["go.mod"],
+        "filetypes": ["go"]
+      }
+   }
+}
