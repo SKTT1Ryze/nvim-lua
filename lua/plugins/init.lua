@@ -30,6 +30,8 @@ function Plugins:config()
   -- Git manager
   Plug('airblade/vim-gitgutter')
   Plug('tpope/vim-fugitive')
+  Plug('nvim-lua/plenary.nvim')
+  Plug('sindrets/diffview.nvim')
 
   -- Themes
   Plug('itchyny/lightline.vim')
