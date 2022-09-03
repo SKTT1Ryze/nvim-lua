@@ -48,6 +48,7 @@ function Plugins:config()
   Plug('numToStr/FTerm.nvim')
   Plug('rcarriga/nvim-notify')
   Plug('nvim-lualine/lualine.nvim')
+  Plug('folke/trouble.nvim')
 
   vim.call('plug#end')
 
@@ -59,6 +60,7 @@ function Plugins:config()
   require('plugins.treesitter_context').config()
   require('plugins.fterm').config()
   require('plugins.lualine_').config()
+  require('plugins.trouble_').config()
 end
 
 return Plugins
