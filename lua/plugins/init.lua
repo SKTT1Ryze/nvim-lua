@@ -46,6 +46,7 @@ function Plugins:config()
   Plug('nvim-treesitter/nvim-treesitter')
   Plug('nvim-treesitter/nvim-treesitter-context')
   Plug('numToStr/FTerm.nvim')
+  Plug('rcarriga/nvim-notify')
 
   vim.call('plug#end')
 
