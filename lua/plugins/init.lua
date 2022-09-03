@@ -20,10 +20,12 @@ function Plugins:config()
   Plug('tomtom/tcomment_vim')
 
   -- File manager
-  Plug('preservim/nerdtree')
+  Plug('kyazdani42/nvim-web-devicons')
+  Plug('kyazdani42/nvim-tree.lua')
   Plug('Yggdroot/LeaderF', {['do'] = vim.fn[':LeaderfInstallCExtension']})
   Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
   Plug('junegunn/fzf.vim')
+
 
   -- Git manager
   Plug('airblade/vim-gitgutter')
@@ -41,7 +43,7 @@ function Plugins:config()
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
-  require('plugins.nerdtree').config()
+  require('plugins.nvim_tree').config()
   require('plugins.leaderf').config()
   require('plugins.colorscheme').config()
   require('plugins.coc_nvim').config()
