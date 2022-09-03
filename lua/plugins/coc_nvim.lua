@@ -21,17 +21,18 @@ function M:config()
   }
 
   vim.opt.signcolumn = 'number'
-  
+
   -- <TAB> to select candidate forward or
   -- pump completion candidate
   vim.cmd([[
-inoremap <silent><expr> <TAB>
+    inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ v:lua.CheckBackSpace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
   ]])
-  
+
   -- <CR> to confirm
   vim.cmd([[
     inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
@@ -39,7 +40,11 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
   ]])
 
   -- diagnostic info
-  map('n', '<LEADER>d', ':CocList diagnostics<CR>', {silent = true, nowait = true, noremap = true})
+  map('n', '<LEADER>d', ':CocList diagnostics<CR>', {
+    silent = true,
+    nowait = true,
+    noremap = true}
+    )
 
   -- Goto code navigation
   map('n', 'gd', '<Plug>(coc-definition)', {silent = true})
@@ -47,7 +52,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
   map('n', 'gy', '<Plug>(coc-type-definition)', {silent = true})
   map('n', 'gi', '<Plug>(coc-implementation)', {silent = true})
   map('n', 'gr', '<Plug>(coc-references)', {silent = true})
-  
+
   -- Go Back
   map('n', 'gb', '<C-o>', {silent = true})
 end

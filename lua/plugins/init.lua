@@ -11,20 +11,20 @@ end
 
 function Plugins:config()
   ensure_vim_plug()
-  
+
   local Plug = vim.fn['plug#']
 
   vim.call('plug#begin', '~/.config/nvim/plugged')
-  
+
   -- Comment
   Plug('tomtom/tcomment_vim')
-  
+
   -- File manager
   Plug('preservim/nerdtree')
   Plug('Yggdroot/LeaderF', {['do'] = vim.fn[':LeaderfInstallCExtension']})
   Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
   Plug('junegunn/fzf.vim')
-  
+
   -- Git manager
   Plug('airblade/vim-gitgutter')
   Plug('tpope/vim-fugitive')
@@ -34,10 +34,10 @@ function Plugins:config()
   Plug('yuttie/inkstained-vim')
   Plug('sainnhe/everforest')
   Plug('arcticicestudio/nord-vim')
-  
+
   -- Lsp
   Plug('neoclide/coc.nvim', {['branch'] = 'release'})
-  
+
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
