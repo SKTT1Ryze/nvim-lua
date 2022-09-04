@@ -62,6 +62,7 @@ function Plugins:config()
   require('plugins.fterm').config()
   require('plugins.lualine_').config()
   require('plugins.trouble_').config()
+  require('plugins.fugitive').config()
 end
 
 return Plugins

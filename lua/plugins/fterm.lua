@@ -31,8 +31,8 @@ function M:config()
     ---The value for each field should be between `0` and `1`
     ---@type table<string,number>
     dimensions = {
-        height = 0.8, -- Height of the terminal window
-        width = 0.8, -- Width of the terminal window
+        height = 0.6, -- Height of the terminal window
+        width = 0.6, -- Width of the terminal window
         x = 0.5, -- X axis of the terminal window
         y = 0.5, -- Y axis of the terminal window
     },
