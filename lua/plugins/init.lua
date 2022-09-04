@@ -37,6 +37,7 @@ function Plugins:config()
   Plug('itchyny/lightline.vim')
   Plug('yuttie/inkstained-vim')
   Plug('sainnhe/everforest')
+  Plug('sainnhe/edge')
   Plug('arcticicestudio/nord-vim')
 
   -- Lsp

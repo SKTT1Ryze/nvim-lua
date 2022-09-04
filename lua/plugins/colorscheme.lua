@@ -1,18 +1,23 @@
 local M = {}
 
 function M:config()
-  vim.cmd([[
-    let g:lightline = {
-          \ 'colorscheme': 'wombat',
-          \ 'component': {
-          \   'readonly': '%{&readonly?"":""}',
-          \ },
-          \ 'separator':    { 'left': '', 'right': '' },
-          \ 'subseparator': { 'left': '', 'right': '' },
-          \ }
+  vim.g.lightline= {
+    colorscheme = 'wombat',
+    component = { readonly = '%{&readonly?"":""}'},
+    separator = { left = '', right = ''},
+    subseparator = { left = '', right = '' }
+  }
 
-    colorscheme nord
+  vim.cmd([[
+    if has('termguicolors')
+       set termguicolors
+    endif
   ]])
+
+  vim.g.edge_stype = 'aura'
+  vim.g.edge_better_performance = 1
+
+  vim.api.nvim_command('colorscheme edge')
 end
 
 return M
