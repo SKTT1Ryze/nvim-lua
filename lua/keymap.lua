@@ -9,6 +9,7 @@ function KeyMap:config()
   map('n', '<C-z>', 'u', {noremap = true, silent = true})
   map('v', '<leader>y', '\"+y', {noremap = true})
   map('n', '<leader>p', '\"+p', {noremap = true})
+  map('v', '<Tab>', 'I<Space><Esc>', {noremap = true})
 end
 
 return KeyMap
