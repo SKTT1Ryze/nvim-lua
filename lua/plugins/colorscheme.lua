@@ -17,7 +17,7 @@ function M:config()
   vim.g.edge_stype = 'aura'
   vim.g.edge_better_performance = 1
 
-  vim.api.nvim_command('colorscheme edge')
+  vim.api.nvim_command('colorscheme gruvbox')
 end
 
 return M

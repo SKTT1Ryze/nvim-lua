@@ -12,7 +12,7 @@ function Editor:config()
 	vim.opt.jumpoptions = 'stack'
 	vim.opt.fdm = 'marker'
   vim.o.incsearch = true
-	vim.o.background = 'dark'
+	vim.o.background = 'light'
 
   vim.cmd([[set notimeout]])
 
