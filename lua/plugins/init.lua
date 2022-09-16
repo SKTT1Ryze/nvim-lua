@@ -43,15 +43,18 @@ function Plugins:config()
   
   -- Lsp
   Plug('neoclide/coc.nvim', {['branch'] = 'release'})
+  
+  -- Terminal
+  -- Plug('numToStr/FTerm.nvim')
+  Plug('akinsho/toggleterm.nvim', {['tag'] = '*'})
 
   -- Others
   Plug('nvim-treesitter/nvim-treesitter')
   Plug('nvim-treesitter/nvim-treesitter-context')
-  Plug('numToStr/FTerm.nvim')
   Plug('rcarriga/nvim-notify')
   Plug('nvim-lualine/lualine.nvim')
   Plug('folke/trouble.nvim')
-
+  
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
@@ -60,10 +63,11 @@ function Plugins:config()
   require('plugins.colorscheme').config()
   require('plugins.coc_nvim').config()
   require('plugins.treesitter_context').config()
-  require('plugins.fterm').config()
+  -- require('plugins.fterm').config()
   require('plugins.lualine_').config()
   require('plugins.trouble_').config()
   require('plugins.fugitive').config()
+  require('plugins.toggle_term').config()
 end
 
 return Plugins

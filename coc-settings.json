@@ -24,8 +24,14 @@
       },
       "golang": {
         "command": "gopls",
-       "rootPatterns": ["go.mod"],
+        "rootPatterns": ["go.mod"],
         "filetypes": ["go"]
+      },
+      "rust": {
+        "command": "rust-analyzer",
+        "filetypes": ["rust"],
+        "rootPatterns": ["Cargo.toml"],
+        "rust-analyzer.cargo.features" :["console-test"]
       }
    }
 }
