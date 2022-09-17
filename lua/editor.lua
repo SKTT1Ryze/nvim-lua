@@ -15,7 +15,7 @@ function Editor:config()
 	vim.o.background = 'light'
 
   vim.cmd([[set notimeout]])
-
+  vim.cmd([[set modifiable]])
   vim.g.neovide_transparency = 0.8
 end
 
