@@ -39,7 +39,8 @@ function Plugins:config()
   Plug('sainnhe/everforest')
   Plug('sainnhe/edge')
   Plug('arcticicestudio/nord-vim')
-  Plug 'morhetz/gruvbox'
+  Plug('morhetz/gruvbox')
+  Plug('kyoz/purify', {['rtp'] = 'vim' })
   
   -- Lsp
   Plug('neoclide/coc.nvim', {['branch'] = 'release'})
