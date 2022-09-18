@@ -1,4 +1,4 @@
-local Plugins = {}
+ local Plugins = {}
 
 function ensure_vim_plug()
   vim.cmd([[
@@ -39,7 +39,8 @@ function Plugins:config()
   Plug('sainnhe/everforest')
   Plug('sainnhe/edge')
   Plug('arcticicestudio/nord-vim')
-  Plug 'morhetz/gruvbox'
+  Plug('morhetz/gruvbox')
+  Plug('kyoz/purify', {['rtp'] = 'vim' })
   
   -- Lsp
   Plug('neoclide/coc.nvim', {['branch'] = 'release'})
@@ -48,12 +49,16 @@ function Plugins:config()
   -- Plug('numToStr/FTerm.nvim')
   Plug('akinsho/toggleterm.nvim', {['tag'] = '*'})
 
+  -- Dev
+  Plug('MunifTanjim/nui.nvim')
+
   -- Others
   Plug('nvim-treesitter/nvim-treesitter')
   Plug('nvim-treesitter/nvim-treesitter-context')
   Plug('rcarriga/nvim-notify')
   Plug('nvim-lualine/lualine.nvim')
   Plug('folke/trouble.nvim')
+  Plug('VonHeikemen/fine-cmdline.nvim')
   
   vim.call('plug#end')
 
@@ -68,6 +73,8 @@ function Plugins:config()
   require('plugins.trouble_').config()
   require('plugins.fugitive').config()
   require('plugins.toggle_term').config()
+  require('plugins.fine_cmdline').config()
+
 end
 
 return Plugins
