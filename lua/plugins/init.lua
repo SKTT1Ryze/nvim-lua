@@ -52,6 +52,9 @@ function Plugins:config()
   -- Dev
   Plug('MunifTanjim/nui.nvim')
 
+  -- Copilot
+  -- Plug('github/copilot.vim')
+
   -- Others
   Plug('nvim-treesitter/nvim-treesitter')
   Plug('nvim-treesitter/nvim-treesitter-context')
