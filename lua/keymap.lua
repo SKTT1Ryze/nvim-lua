@@ -12,6 +12,8 @@ function KeyMap:config()
   map('v', '<Tab>', 'I<Space><Esc>', {noremap = true})
   map('n', '<C-j>', '10j', {noremap = true})
   map('n', '<C-k>', '10k', {noremap = true})
+  map('n', '<leader>[', ':m-2<CR>', {noremap = true})
+  map('n', '<leader>]', ':m+<CR>', {noremap = true})
 end
 
 return KeyMap
