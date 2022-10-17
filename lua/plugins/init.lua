@@ -67,7 +67,7 @@ function Plugins:config()
 
   require('plugins.tcomment_vim').config()
   require('plugins.nvim_tree').config()
-  require('plugins.leaderf').config()
+  require('plugins.search').config()
   require('plugins.colorscheme').config()
   require('plugins.coc_nvim').config()
   require('plugins.treesitter_context').config()
