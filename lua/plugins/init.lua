@@ -62,6 +62,7 @@ function Plugins:config()
   Plug('nvim-lualine/lualine.nvim')
   Plug('folke/trouble.nvim')
   Plug('VonHeikemen/fine-cmdline.nvim')
+  Plug('akinsho/bufferline.nvim', {['tag'] = 'v2.*'})
   
   vim.call('plug#end')
 
@@ -77,6 +78,8 @@ function Plugins:config()
   require('plugins.fugitive').config()
   require('plugins.toggle_term').config()
   require('plugins.fine_cmdline').config()
+
+  require("bufferline").setup{}
 
 end
 
