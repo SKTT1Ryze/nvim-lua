@@ -101,6 +101,18 @@ function notify_config()
   ]])
 end
 
+-- Use K to show documentation in preview window.
+function _G.show_docs()
+    local cw = vim.fn.expand('<cword>')
+    if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+        vim.api.nvim_command('h ' .. cw)
+    elseif vim.api.nvim_eval('coc#rpc#ready()') then
+        vim.fn.CocActionAsync('doHover')
+    else
+        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+    end
+end
+
 function M:config()
   vim.g.coc_global_extenstions = {
     'coc-highlight',
@@ -148,6 +160,7 @@ function M:config()
   -- Go Back
   map('n', 'gb', '<C-o>', {silent = true})
 
+  map('n', 'K', '<CMD>lua _G.show_docs()<CR>', {silent = true})
   notify_config()
 end
 
