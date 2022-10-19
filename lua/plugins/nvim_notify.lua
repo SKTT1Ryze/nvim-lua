@@ -21,6 +21,9 @@ function M:config()
 		level = "TRACE",
 	})
   vim.notify = notify
+
+  require("telescope").load_extension("notify")
+  require('telescope').extensions.notify.notify(<opts>)
 end
 
 return M
