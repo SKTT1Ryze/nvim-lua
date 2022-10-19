@@ -56,6 +56,8 @@ function Plugins:config()
   Plug('hrsh7th/cmp-cmdline')
   Plug('hrsh7th/cmp-vsnip')
   Plug('hrsh7th/vim-vsnip')
+  Plug('j-hui/fidget.nvim')
+  Plug('onsails/lspkind.nvim')
   
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
@@ -93,6 +95,7 @@ function Plugins:config()
   require('plugins.cmp').config()
 
   require("bufferline").setup{}
+  require"fidget".setup{}
 
 end
 
