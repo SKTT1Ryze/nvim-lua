@@ -45,7 +45,17 @@ function Plugins:config()
   Plug('kyoz/purify', {['rtp'] = 'vim' })
   
   -- Lsp
-  Plug('neoclide/coc.nvim', {['branch'] = 'release'})
+  -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})
+  Plug('neovim/nvim-lspconfig')
+  Plug('williamboman/mason.nvim')
+  Plug('williamboman/mason-lspconfig.nvim')
+  Plug('hrsh7th/nvim-cmp')
+  Plug('hrsh7th/cmp-nvim-lsp')
+  Plug('hrsh7th/cmp-buffer')
+  Plug('hrsh7th/cmp-path')
+  Plug('hrsh7th/cmp-cmdline')
+  Plug('hrsh7th/cmp-vsnip')
+  Plug('hrsh7th/vim-vsnip')
   
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
@@ -72,7 +82,7 @@ function Plugins:config()
   require('plugins.nvim_tree').config()
   require('plugins.search').config()
   require('plugins.colorscheme').config()
-  require('plugins.coc_nvim').config()
+  -- require('plugins.coc_nvim').config()
   require('plugins.treesitter_context').config()
   -- require('plugins.fterm').config()
   require('plugins.lualine_').config()
@@ -80,6 +90,7 @@ function Plugins:config()
   require('plugins.fugitive').config()
   require('plugins.toggle_term').config()
   require('plugins.fine_cmdline').config()
+  require('plugins.cmp').config()
 
   require("bufferline").setup{}
 
