@@ -2,7 +2,7 @@ local M = {}
 
 function M:config()
   -- Set up nvim-cmp.
-  local cmp = require'cmp'
+  local cmp = require 'cmp'
 
   cmp.setup({
     snippet = {

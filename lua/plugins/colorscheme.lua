@@ -1,10 +1,10 @@
 local M = {}
 
 function M:config()
-  vim.g.lightline= {
+  vim.g.lightline = {
     colorscheme = 'purify',
-    component = { readonly = '%{&readonly?"":""}'},
-    separator = { left = '', right = ''},
+    component = { readonly = '%{&readonly?"":""}' },
+    separator = { left = '', right = '' },
     subseparator = { left = '', right = '' }
   }
 
@@ -16,7 +16,7 @@ function M:config()
 
   vim.g.edge_stype = 'aura'
   vim.g.edge_better_performance = 1
-  
+
   vim.api.nvim_command('syntax on')
   vim.api.nvim_command('colorscheme purify')
 end

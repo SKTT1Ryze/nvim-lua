@@ -1,4 +1,4 @@
- local Plugins = {}
+local Plugins = {}
 
 function ensure_vim_plug()
   vim.cmd([[
@@ -22,11 +22,11 @@ function Plugins:config()
   -- File manager
   Plug('kyazdani42/nvim-web-devicons')
   Plug('kyazdani42/nvim-tree.lua')
-  Plug('Yggdroot/LeaderF', {['do'] = vim.fn[':LeaderfInstallCExtension']})
-  Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
+  Plug('Yggdroot/LeaderF', { ['do'] = vim.fn[':LeaderfInstallCExtension'] })
+  Plug('junegunn/fzf', { ['do'] = vim.fn['fzf#install'] })
   Plug('junegunn/fzf.vim')
   Plug('nvim-lua/plenary.nvim')
-  Plug('nvim-telescope/telescope.nvim', {['tag'] = '0.1.0'})
+  Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.0' })
 
 
   -- Git manager
@@ -42,8 +42,8 @@ function Plugins:config()
   Plug('sainnhe/edge')
   Plug('arcticicestudio/nord-vim')
   Plug('morhetz/gruvbox')
-  Plug('kyoz/purify', {['rtp'] = 'vim' })
-  
+  Plug('kyoz/purify', { ['rtp'] = 'vim' })
+
   -- Lsp
   -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})
   Plug('neovim/nvim-lspconfig')
@@ -58,10 +58,10 @@ function Plugins:config()
   Plug('hrsh7th/vim-vsnip')
   Plug('j-hui/fidget.nvim')
   Plug('onsails/lspkind.nvim')
-  
+
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
-  Plug('akinsho/toggleterm.nvim', {['tag'] = '*'})
+  Plug('akinsho/toggleterm.nvim', { ['tag'] = '*' })
 
   -- Dev
   Plug('MunifTanjim/nui.nvim')
@@ -76,8 +76,8 @@ function Plugins:config()
   Plug('nvim-lualine/lualine.nvim')
   Plug('folke/trouble.nvim')
   Plug('VonHeikemen/fine-cmdline.nvim')
-  Plug('akinsho/bufferline.nvim', {['tag'] = 'v2.*'})
-  
+  Plug('akinsho/bufferline.nvim', { ['tag'] = 'v2.*' })
+
   vim.call('plug#end')
 
   require('plugins.tcomment_vim').config()
@@ -94,8 +94,8 @@ function Plugins:config()
   require('plugins.fine_cmdline').config()
   require('plugins.cmp').config()
 
-  require("bufferline").setup{}
-  require"fidget".setup{}
+  require("bufferline").setup {}
+  require "fidget".setup {}
 
 end
 
