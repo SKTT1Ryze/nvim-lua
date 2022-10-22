@@ -58,6 +58,8 @@ function Plugins:config()
   Plug('hrsh7th/vim-vsnip')
   Plug('j-hui/fidget.nvim')
   Plug('onsails/lspkind.nvim')
+  Plug('RishabhRD/popfix')
+  Plug('RishabhRD/nvim-lsputils')
 
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
