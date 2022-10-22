@@ -20,6 +20,7 @@ function M:config()
       tabe = '<C-c>t',
       quit = 'q',
     },
+    diagnostic_header = { "[x]", "[x]", "[x]", "[x]" },
   })
 
   -- Lsp finder find the symbol definition implement reference
