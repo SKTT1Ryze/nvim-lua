@@ -76,7 +76,10 @@ function Lsp:config()
   require('lspconfig')['tsserver'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    capabilities = capabilities
+    capabilities = capabilities,
+    format = {
+      enable = true
+    }
   }
   require('lspconfig')['gopls'].setup {
     on_attach = on_attach,
