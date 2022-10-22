@@ -110,6 +110,8 @@ function Lsp:config()
       end,
     })
   end
+
+  require("lsp.lsputils").config()
 end
 
 return Lsp
