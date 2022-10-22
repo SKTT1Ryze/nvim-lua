@@ -60,6 +60,7 @@ function Plugins:config()
   Plug('onsails/lspkind.nvim')
   Plug('RishabhRD/popfix')
   Plug('RishabhRD/nvim-lsputils')
+  Plug('glepnir/lspsaga.nvim', {['branch'] = 'main' })
 
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
