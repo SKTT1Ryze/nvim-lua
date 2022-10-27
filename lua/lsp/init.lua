@@ -95,6 +95,11 @@ function Lsp:config()
       ["rust-analyzer"] = {}
     }
   }
+  require('lspconfig')['clangd'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  }
 
   local notify = require 'notify'
   vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
