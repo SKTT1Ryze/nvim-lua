@@ -12,7 +12,7 @@ function Lsp:config()
   })
 
   require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd" }
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" }
   })
 
   -- Mappings.
@@ -96,6 +96,11 @@ function Lsp:config()
     }
   }
   require('lspconfig')['clangd'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  }
+  require('lspconfig')['cssls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
