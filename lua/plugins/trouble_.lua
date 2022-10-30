@@ -40,10 +40,10 @@ function M:config()
     auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
     signs = {
       -- icons / text used for a diagnostic
-      error = "[x]",
-      warning = "[w]",
+      error = "",
+      warning = "",
       hint = "",
-      information = "[i]",
+      information = "",
       other = "[✅]"
     },
     use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
