@@ -40,13 +40,13 @@ function M:config()
     auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
     signs = {
       -- icons / text used for a diagnostic
-      error = "",
-      warning = "",
+      error = "[x]",
+      warning = "[w]",
       hint = "",
-      information = "",
-      other = "﫠"
+      information = "[i]",
+      other = "[✅]"
     },
-    use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+    use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
   }
 
   require('trouble').setup(options)
