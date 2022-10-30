@@ -77,7 +77,16 @@ function M:config()
             return vim_item
           end
         end
-        return lspkind.cmp_format({ with_text = false })(entry, vim_item)
+
+        vim_item.menu = ({
+          buffer   = "[BUF]",
+          nvim_lsp = "[LSP]",
+          luasnip  = "[LS]",
+        })[entry.source.name]
+
+        return lspkind.cmp_format({
+          with_text = true,
+        })(entry, vim_item)
       end
     }
   }

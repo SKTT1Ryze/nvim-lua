@@ -44,9 +44,9 @@ function M:config()
       warning = "",
       hint = "",
       information = "",
-      other = "﫠"
+      other = "[✅]"
     },
-    use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+    use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
   }
 
   require('trouble').setup(options)
