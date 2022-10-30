@@ -17,7 +17,7 @@ function M:config()
 
   local builtin = require('telescope.builtin')
   vim.keymap.set('n', '<leader>f', builtin.find_files, {})
-  map('n', '<leader>r', ':Rg<CR>', {})
+  map('n', '<leader>r', ':Rg<CR>', { noremap = true })
   vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
   map('n', '<leader>F', ':Leaderf rg ', {})
