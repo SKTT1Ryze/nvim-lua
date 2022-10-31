@@ -119,7 +119,7 @@ function Lsp:config()
       title = 'LSP | ' .. client.name,
       timeout = 10000,
       keep = function()
-        return lvl == 'ERROR' or lvl == 'WARN'
+        return false
       end,
     })
   end
