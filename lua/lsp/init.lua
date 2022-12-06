@@ -92,7 +92,17 @@ function Lsp:config()
     capabilities = capabilities,
     -- Server-specific settings...
     settings = {
-      ["rust-analyzer"] = {}
+      ["rust-analyzer"] = {
+        cargo = {
+          buildScripts = {
+            enable = true,
+          },
+          features = {"console-test", "enable_lgbm"}
+        },
+        procMacro = {
+          enable = true
+        },
+      }
     }
   }
   require('lspconfig')['clangd'].setup {
