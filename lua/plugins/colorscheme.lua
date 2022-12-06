@@ -19,7 +19,8 @@ function M:config()
 
   vim.api.nvim_command('syntax on')
   -- vim.api.nvim_command('colorscheme purify')
-  vim.api.nvim_command('colorscheme edge')
+  -- vim.api.nvim_command('colorscheme edge')
+  vim.api.nvim_command('colorscheme gruvbox')
 end
 
 return M
