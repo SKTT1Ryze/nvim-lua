@@ -43,6 +43,7 @@ function Plugins:config()
   Plug('arcticicestudio/nord-vim')
   Plug('morhetz/gruvbox')
   Plug('kyoz/purify', { ['rtp'] = 'vim' })
+  Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
   -- Lsp
   -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})
@@ -60,7 +61,7 @@ function Plugins:config()
   Plug('onsails/lspkind.nvim')
   Plug('RishabhRD/popfix')
   Plug('RishabhRD/nvim-lsputils')
-  Plug('glepnir/lspsaga.nvim', {['branch'] = 'main' })
+  Plug('glepnir/lspsaga.nvim', { ['branch'] = 'main' })
 
   -- Terminal
   -- Plug('numToStr/FTerm.nvim')
@@ -96,6 +97,7 @@ function Plugins:config()
   require('plugins.toggle_term').config()
   require('plugins.fine_cmdline').config()
   require('plugins.cmp').config()
+  require('plugins.catppuccin_').config()
 
   require("bufferline").setup {}
   require "fidget".setup {}
