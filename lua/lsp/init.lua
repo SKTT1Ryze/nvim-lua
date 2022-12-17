@@ -46,7 +46,7 @@ function Lsp:config()
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', 'ff', function() vim.lsp.buf.formatting { async = true } end, bufopts)
+    vim.keymap.set('n', 'ff', function() vim.lsp.buf.format { async = true } end, bufopts)
 
     -- Go back
     vim.api.nvim_set_keymap('n', 'gb', '<C-o>', { silent = true })
