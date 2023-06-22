@@ -22,6 +22,7 @@ function M:config()
   -- vim.api.nvim_command('colorscheme edge')
   -- vim.api.nvim_command('colorscheme gruvbox')
   vim.api.nvim_command('colorscheme catppuccin')
+  vim.api.nvim_command('colorscheme night-owl')
 end
 
 return M
