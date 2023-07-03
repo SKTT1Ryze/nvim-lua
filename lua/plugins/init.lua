@@ -82,6 +82,7 @@ function Plugins:config()
   Plug('folke/trouble.nvim')
   Plug('VonHeikemen/fine-cmdline.nvim')
   Plug('akinsho/bufferline.nvim', { ['tag'] = 'v2.*' })
+  Plug('lukas-reineke/indent-blankline.nvim')
 
   vim.call('plug#end')
 
@@ -99,7 +100,7 @@ function Plugins:config()
   require('plugins.fine_cmdline').config()
   require('plugins.cmp').config()
   require('plugins.catppuccin_').config()
-
+  require('plugins.indent_blankline_').config();
   require("bufferline").setup {}
   require "fidget".setup {}
 
