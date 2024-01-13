@@ -3,7 +3,7 @@ local keymap = vim.keymap.set
 
 function M:config()
   local saga = require('lspsaga')
-  saga.init_lsp_saga({
+  saga.setup({
     border_style = "rounded",
     code_action_icon = "->",
     finder_action_keys = {

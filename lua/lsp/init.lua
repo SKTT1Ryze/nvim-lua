@@ -12,7 +12,7 @@ function Lsp:config()
   })
 
   require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" }
+    ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" }
   })
 
   -- Mappings.
@@ -59,7 +59,7 @@ function Lsp:config()
 
   -- Cmp
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  require('lspconfig')['sumneko_lua'].setup {
+  require('lspconfig')['lua_ls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,

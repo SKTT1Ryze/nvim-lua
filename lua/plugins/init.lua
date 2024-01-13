@@ -26,7 +26,7 @@ function Plugins:config()
   Plug('junegunn/fzf', { ['do'] = vim.fn['fzf#install'] })
   Plug('junegunn/fzf.vim')
   Plug('nvim-lua/plenary.nvim')
-  Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.0' })
+  Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.5' })
 
 
   -- Git manager
@@ -75,14 +75,14 @@ function Plugins:config()
   -- Plug('github/copilot.vim')
 
   -- Others
-  Plug('nvim-treesitter/nvim-treesitter')
+  Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
   Plug('nvim-treesitter/nvim-treesitter-context')
   Plug('rcarriga/nvim-notify')
   -- Plug('nvim-lualine/lualine.nvim')
   Plug('folke/trouble.nvim')
   Plug('VonHeikemen/fine-cmdline.nvim')
   Plug('akinsho/bufferline.nvim', { ['tag'] = 'v2.*' })
-  Plug('lukas-reineke/indent-blankline.nvim')
+  Plug('lukas-reineke/indent-blankline.nvim', { ['main'] = 'ibl', ['opts'] = {} })
 
   vim.call('plug#end')
 
@@ -91,6 +91,7 @@ function Plugins:config()
   require('plugins.search').config()
   require('plugins.colorscheme').config()
   -- require('plugins.coc_nvim').config()
+  require('plugins.treesitter').config()
   require('plugins.treesitter_context').config()
   -- require('plugins.fterm').config()
   -- require('plugins.lualine_').config()
