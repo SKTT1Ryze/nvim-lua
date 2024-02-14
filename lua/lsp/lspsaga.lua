@@ -6,19 +6,23 @@ function M:config()
   saga.setup({
     border_style = "rounded",
     code_action_icon = "->",
-    finder_action_keys = {
-      open = "<CR>",
-      vsplit = "s",
-      split = "i",
-      tabe = "t",
-      quit = "q",
+    finder = {
+      keys = {
+        toggle_or_open = "<CR>",
+        vsplit = "s",
+        split = "i",
+        tabe = "t",
+        quit = "q",
+      }
     },
-    definition_action_keys = {
-      edit = '<CR>',
-      vsplit = '<C-c>v',
-      split = '<C-c>i',
-      tabe = '<C-c>t',
-      quit = 'q',
+    definition = {
+      keys = {
+        edit = '<CR>',
+        vsplit = '<C-c>v',
+        split = '<C-c>i',
+        tabe = '<C-c>t',
+        quit = 'q',
+      }
     },
     diagnostic_header = { "[x]", "[x]", "[x]", "[x]" },
   })
@@ -27,7 +31,7 @@ function M:config()
   -- if there is no implement it will hide
   -- when you use action in finder like open vsplit then you can
   -- use <C-t> to jump back
-  keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+  keymap("n", "gh", "<cmd>Lspsaga finder<CR>", { silent = true })
 
   -- Code action
   keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
