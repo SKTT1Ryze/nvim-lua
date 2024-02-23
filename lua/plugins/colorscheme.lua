@@ -21,8 +21,9 @@ function M:config()
   -- vim.api.nvim_command('colorscheme purify')
   -- vim.api.nvim_command('colorscheme edge')
   -- vim.api.nvim_command('colorscheme gruvbox')
-  vim.api.nvim_command('colorscheme catppuccin')
-  vim.api.nvim_command('colorscheme night-owl')
+  -- vim.api.nvim_command('colorscheme catppuccin')
+  -- vim.api.nvim_command('colorscheme night-owl')
+  vim.api.nvim_command('colorscheme NeoSolarized')
 end
 
 return M

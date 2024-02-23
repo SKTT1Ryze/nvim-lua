@@ -45,6 +45,7 @@ function Plugins:config()
   Plug('kyoz/purify', { ['rtp'] = 'vim' })
   Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
   Plug('oxfist/night-owl.nvim')
+  Plug('Tsuzat/NeoSolarized.nvim')
 
   -- Lsp
   -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})
