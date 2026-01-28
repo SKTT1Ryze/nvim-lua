@@ -86,15 +86,16 @@ function Lsp:config()
     flags = lsp_flags,
     capabilities = capabilities
   }
-  require('lspconfig')['rust_analyzer'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-  }
+  -- NOTE: rust_analyzer is configured in lua/plugins/init.lua
+  -- Commented out to prevent duplicate instances
+  -- require('lspconfig')['rust_analyzer'].setup {
+  --   on_attach = on_attach,
+  --   flags = lsp_flags,
+  --   capabilities = capabilities,
+  --   settings = {
+  --     ["rust-analyzer"] = {}
+  --   }
+  -- }
   require('lspconfig')['clangd'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
