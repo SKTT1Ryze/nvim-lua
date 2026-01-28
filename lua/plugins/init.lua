@@ -115,7 +115,7 @@ function M:config()
       "williamboman/mason.nvim",
       build = ":MasonUpdate",
       lazy = false,
-      priority = 100,
+      priority = 90,  -- Load after notify (200) but before mason-lspconfig
       config = function()
         require("mason").setup({
           ui = {
@@ -131,11 +131,12 @@ function M:config()
     {
       "williamboman/mason-lspconfig.nvim",
       lazy = false,
-      priority = 99,
+      priority = 80,  -- Load after mason
       dependencies = { "williamboman/mason.nvim" },
       config = function()
         require("mason-lspconfig").setup({
-          ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" }
+          ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" },
+          automatic_installation = false,  -- Disable automatic setup, we configure manually
         })
       end,
     },
@@ -244,7 +245,10 @@ function M:config()
               keep = function() return false end,
             })
           else
-            vim.notify(result.message, vim.log.levels[lvl])
+            vim.notify(
+              string.format('[LSP | %s] %s', client.name, result.message),
+              vim.log.levels[lvl]
+            )
           end
         end
 
@@ -328,17 +332,17 @@ function M:config()
     {
       "rcarriga/nvim-notify",
       lazy = false,
-      priority = 50,
-      cond = function()
-        return vim.fn.has("gui_running") == 1 or vim.fn.exists("$TERM") == 1
-      end,
+      priority = 200,
       config = function()
         local notify = require("notify")
         notify.setup({
-          stages = "fade",
+          stages = "fade_in_slide_out",
           timeout = 3000,
           max_width = 50,
+          max_height = 10,
           background_colour = "#000000",
+          render = "compact",
+          minimum_width = 30,
         })
         vim.notify = notify
       end,
