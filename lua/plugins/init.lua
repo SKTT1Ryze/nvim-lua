@@ -19,7 +19,17 @@ function M:config()
   -- Plugin specifications
   require("lazy").setup({
     -- Comment utility
-    { "tomtom/tcomment_vim" },
+    {
+      "tomtom/tcomment_vim",
+      keys = {
+        { "<leader>cn", mode = { "n", "v" }, desc = "Comment lines" },
+        { "<leader>cu", mode = { "n", "v" }, desc = "Uncomment lines" },
+        { "gc", mode = { "n", "v" }, desc = "Toggle comment" },
+      },
+      config = function()
+        require("plugins.tcomment_vim").config()
+      end,
+    },
 
     -- File manager
     {
