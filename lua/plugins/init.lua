@@ -143,7 +143,16 @@ function M:config()
       dependencies = { "williamboman/mason.nvim" },
       config = function()
         require("mason-lspconfig").setup({
-          ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" },
+          ensure_installed = {
+            "lua_ls",
+            "rust_analyzer",
+            "tsserver",
+            "gopls",
+            "vimls",
+            "clangd",
+            "cssls",
+            "dartls"  -- Dart LSP for Flutter development
+          },
           automatic_installation = false,  -- Disable automatic setup, we configure manually
         })
       end,
@@ -221,6 +230,26 @@ function M:config()
           on_attach = on_attach,
           flags = lsp_flags,
           capabilities = capabilities
+        }
+        require('lspconfig')['dartls'].setup {
+          on_attach = on_attach,
+          flags = lsp_flags,
+          capabilities = capabilities,
+          cmd = { "dart", "language-server", "--protocol=lsp" },
+          filetypes = { "dart" },
+          init_options = {
+            closingLabels = true,
+            flutterOutline = true,
+            onlyAnalyzeProjectsWithOpenFiles = true,
+            outline = true,
+            suggestFromUnimportedLibraries = true,
+          },
+          settings = {
+            dart = {
+              completeFunctionCalls = true,
+              showTodos = true,
+            }
+          }
         }
 
         -- Diagnostic signs

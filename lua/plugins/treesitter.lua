@@ -3,7 +3,19 @@ local M = {}
 function M:config()
   require('nvim-treesitter.config').setup {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
-    ensure_installed = { "c", "cpp", "rust", "lua", "vim", "vimdoc", "css", "tsx", "typescript", "javascript" },
+    ensure_installed = {
+      "c",
+      "cpp",
+      "rust",
+      "lua",
+      "vim",
+      "vimdoc",
+      "css",
+      "tsx",
+      "typescript",
+      "javascript",
+      "dart"  -- Dart/Flutter syntax highlighting
+    },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
