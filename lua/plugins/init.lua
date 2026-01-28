@@ -37,7 +37,7 @@ function M:config()
     -- Search tools
     {
       "nvim-telescope/telescope.nvim",
-      tag = "0.1.5",
+      tag = "0.1.8",
       dependencies = { "nvim-lua/plenary.nvim" },
       cmd = "Telescope",
       keys = {
@@ -46,6 +46,14 @@ function M:config()
         { "<leader>r", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
       },
       config = function()
+        require("telescope").setup({
+          defaults = {
+            -- Disable treesitter-based previewer to avoid compatibility issues
+            preview = {
+              treesitter = false,
+            },
+          },
+        })
         require("plugins.search").config()
       end,
     },
