@@ -112,34 +112,6 @@ function M:config()
 
     -- LSP & Completion
     {
-      "williamboman/mason.nvim",
-      build = ":MasonUpdate",
-      lazy = false,
-      priority = 100,
-      config = function()
-        require("mason").setup({
-          ui = {
-            icons = {
-              package_installed = "✓",
-              package_pending = "➜",
-              package_uninstalled = "✗"
-            }
-          }
-        })
-      end,
-    },
-    {
-      "williamboman/mason-lspconfig.nvim",
-      lazy = false,
-      priority = 99,
-      dependencies = { "williamboman/mason.nvim" },
-      config = function()
-        require("mason-lspconfig").setup({
-          ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "gopls", "vimls", "clangd", "cssls" }
-        })
-      end,
-    },
-    {
       "neovim/nvim-lspconfig",
       event = { "BufReadPre", "BufNewFile" },
       dependencies = {
@@ -147,112 +119,13 @@ function M:config()
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
       },
-      config = function()
-        -- Load LSP configuration
-        local opts = { noremap = true, silent = true }
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
-        local on_attach = function(client, bufnr)
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-          vim.keymap.set('n', '<space>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, bufopts)
-          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-          vim.keymap.set('n', 'ff', function() vim.lsp.buf.format { async = true } end, bufopts)
-          vim.api.nvim_set_keymap('n', 'gb', '<C-o>', { silent = true })
-        end
-
-        local lsp_flags = { debounce_text_changes = 150 }
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-        -- Setup language servers
-        require('lspconfig')['lua_ls'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities,
-          format = {
-            enable = true,
-            defaultConfig = {
-              indent_style = "space",
-              indent_size = "2",
-            }
-          },
-        }
-        require('lspconfig')['tsserver'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities,
-        }
-        require('lspconfig')['gopls'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities
-        }
-        require('lspconfig')['rust_analyzer'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities,
-          settings = { ["rust-analyzer"] = {} }
-        }
-        require('lspconfig')['clangd'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities
-        }
-        require('lspconfig')['cssls'].setup {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities
-        }
-
-        -- Diagnostic signs
-        local signs = {
-          { name = "DiagnosticSignError", text = "❌" },
-          { name = "DiagnosticSignWarn", text = "⚠️" },
-          { name = "DiagnosticSignHint", text = "💡" },
-          { name = "DiagnosticSignInfo", text = "🆕" },
-        }
-        for _, sign in ipairs(signs) do
-          vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-        end
-
-        -- Diagnostic handler
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = { prefix = "", spacing = 0 },
-          signs = true,
-          underline = true,
-        })
-
-        -- Notify handler
-        vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
-          local client = vim.lsp.get_client_by_id(ctx.client_id)
-          local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]
-          local ok, notify = pcall(require, 'notify')
-          if ok then
-            notify(result.message, lvl, {
-              title = 'LSP | ' .. client.name,
-              timeout = 10000,
-              keep = function() return false end,
-            })
-          else
-            vim.notify(result.message, vim.log.levels[lvl])
-          end
-        end
-
-        -- Load additional LSP utilities
-        require("lsp.lsputils").config()
-        require("lsp.lspsaga").config()
-      end,
     },
+    {
+      "williamboman/mason.nvim",
+      build = ":MasonUpdate",
+      cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+    },
+    { "williamboman/mason-lspconfig.nvim" },
     {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -327,20 +200,8 @@ function M:config()
     { "MunifTanjim/nui.nvim" },
     {
       "rcarriga/nvim-notify",
-      lazy = false,
-      priority = 50,
-      cond = function()
-        return vim.fn.has("gui_running") == 1 or vim.fn.exists("$TERM") == 1
-      end,
       config = function()
-        local notify = require("notify")
-        notify.setup({
-          stages = "fade",
-          timeout = 3000,
-          max_width = 50,
-          background_colour = "#000000",
-        })
-        vim.notify = notify
+        vim.notify = require("notify")
       end,
     },
     {

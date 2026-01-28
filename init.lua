@@ -1,4 +1,5 @@
 require('editor').config()
 require('keymap').config()
 require('plugins').config()
-require('lsp').config()
+-- LSP configuration is now loaded within lazy.nvim plugin specs
+
