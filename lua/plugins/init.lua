@@ -219,7 +219,46 @@ function M:config()
           on_attach = on_attach,
           flags = lsp_flags,
           capabilities = capabilities,
-          settings = { ["rust-analyzer"] = {} }
+          settings = {
+            ["rust-analyzer"] = {
+              -- Performance optimizations
+              checkOnSave = {
+                command = "clippy",  -- Use clippy for better linting
+                extraArgs = { "--no-deps" },  -- Don't check dependencies
+              },
+              cargo = {
+                allFeatures = false,  -- Don't enable all features
+                loadOutDirsFromCheck = true,
+                buildScripts = {
+                  enable = true,
+                },
+              },
+              procMacro = {
+                enable = true,
+                ignored = {
+                  ["async-trait"] = { "async_trait" },
+                  ["napi-derive"] = { "napi" },
+                  ["async-recursion"] = { "async_recursion" },
+                },
+              },
+              diagnostics = {
+                enable = true,
+                disabled = { "unresolved-proc-macro" },  -- Reduce noise
+                enableExperimental = true,
+              },
+              inlayHints = {
+                enable = true,
+                chainingHints = true,
+                parameterHints = true,
+                typeHints = true,
+              },
+              lens = {
+                enable = true,
+                references = true,
+                implementations = true,
+              },
+            }
+          }
         }
         require('lspconfig')['clangd'].setup {
           on_attach = on_attach,
