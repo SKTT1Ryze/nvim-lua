@@ -219,15 +219,23 @@ function M:config()
           on_attach = on_attach,
           flags = lsp_flags,
           capabilities = capabilities,
+          -- Force use Mason-installed rust-analyzer to avoid conflicts
+          cmd = {
+            vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer"
+          },
+          -- Single server instance per root
+          root_dir = require('lspconfig.util').root_pattern("Cargo.toml", "rust-project.json"),
+          single_file_support = false,  -- Prevent starting for single files
           settings = {
             ["rust-analyzer"] = {
               -- Performance optimizations
               checkOnSave = {
-                command = "clippy",  -- Use clippy for better linting
-                extraArgs = { "--no-deps" },  -- Don't check dependencies
+                enable = true,
+                command = "clippy",
+                extraArgs = { "--no-deps" },
               },
               cargo = {
-                allFeatures = false,  -- Don't enable all features
+                allFeatures = false,
                 loadOutDirsFromCheck = true,
                 buildScripts = {
                   enable = true,
@@ -243,19 +251,49 @@ function M:config()
               },
               diagnostics = {
                 enable = true,
-                disabled = { "unresolved-proc-macro" },  -- Reduce noise
-                enableExperimental = true,
+                disabled = { "unresolved-proc-macro" },
+                enableExperimental = false,  -- Disable experimental to reduce CPU
+              },
+              -- Critical: Cache and performance settings
+              cachePriming = {
+                enable = true,
+                numThreads = 2,  -- Reduce threads to prevent overload
+              },
+              files = {
+                excludeDirs = { ".direnv", "node_modules", ".git" },
+              },
+              -- Limit background operations
+              completion = {
+                autoimport = {
+                  enable = true,
+                },
+                postfix = {
+                  enable = false,  -- Disable to reduce CPU
+                },
               },
               inlayHints = {
                 enable = true,
-                chainingHints = true,
-                parameterHints = true,
-                typeHints = true,
+                chainingHints = {
+                  enable = true,
+                },
+                parameterHints = {
+                  enable = true,
+                },
+                typeHints = {
+                  enable = false,  -- Disable to reduce visual noise
+                },
               },
               lens = {
                 enable = true,
-                references = true,
-                implementations = true,
+                run = {
+                  enable = true,
+                },
+                implementations = {
+                  enable = false,  -- Disable to reduce overhead
+                },
+                references = {
+                  enable = false,  -- Disable to reduce overhead
+                },
               },
             }
           }
