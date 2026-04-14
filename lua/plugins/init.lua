@@ -491,7 +491,6 @@ function M:config()
     },
     {
       "akinsho/bufferline.nvim",
-      version = "v4.*",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       event = "VeryLazy",
       config = function()
