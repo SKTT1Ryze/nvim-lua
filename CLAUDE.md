@@ -8,7 +8,6 @@ Personal Neovim config centered on Rust development, with support for Go, TypeSc
 .
 ├── init.lua                  # Entry point: loads editor / keymap / plugins
 ├── lazy-lock.json            # Plugin lockfile
-├── coc-settings.json         # CoC fallback LSP config (not primary)
 └── lua/
     ├── editor.lua            # Vim options (indent, search, folding)
     ├── keymap.lua            # Global keybindings
@@ -17,18 +16,16 @@ Personal Neovim config centered on Rust development, with support for Go, TypeSc
     │   ├── init.lua          # lazy.nvim bootstrap + all plugin specs
     │   ├── cmp.lua           # Completion engine
     │   ├── treesitter.lua    # Syntax highlighting
+    │   ├── treesitter_context.lua # Sticky Treesitter context
     │   ├── colorscheme.lua   # Color scheme (default: NeoSolarized)
     │   ├── catppuccin_.lua   # Catppuccin custom highlight overrides
-    │   ├── lualine_.lua      # Statusline
-    │   ├── nvim_tree.lua     # File explorer
     │   ├── search.lua        # Telescope / LeaderF / FZF
+    │   ├── fine_cmdline.lua  # Command-line UI
     │   ├── toggle_term.lua   # Integrated terminal
     │   ├── trouble_.lua      # Diagnostics list
     │   ├── fugitive.lua      # Git integration
-    │   ├── tcomment_vim.lua  # Comment toggling
-    │   └── lspsaga.lua       # LSP UI enhancements
+    │   └── tcomment_vim.lua  # Comment toggling
     └── lsp/
-        ├── lsputils.lua      # LSP handler overrides
         └── lspsaga.lua       # Lspsaga keybindings
 ```
 
@@ -47,7 +44,7 @@ Personal Neovim config centered on Rust development, with support for Go, TypeSc
 
 All plugins are declared in `lua/plugins/init.lua` using lazy.nvim specs.
 
-- Performance-critical plugins (`mason`, `nvim-notify`) use `lazy = false` with explicit priority
+- Performance-critical plugins (`mason`, `nvim-notify`, default colorscheme) use `lazy = false` with explicit priority
 - Other plugins lazy-load on `BufReadPre`, `LspAttach`, or `InsertEnter`
 - When modifying a plugin: edit its config file in `lua/plugins/<name>.lua`, then update the spec in `init.lua` if needed
 
@@ -114,7 +111,8 @@ To add a new LSP server:
 | `<space>rn` | Rename symbol |
 | `ff` | Format buffer |
 | `[d` / `]d` | Previous / next diagnostic |
-| `<leader>cd` | Show line diagnostics |
+| `<leader>cd` | Show cursor diagnostics |
+| `<leader>cD` | Show line diagnostics |
 
 ### Git
 
@@ -153,4 +151,4 @@ To add a new LSP server:
 - Signs: `❌` error, `⚠️` warn, `💡` hint, `🆕` info
 - Virtual text shown inline with a prefix
 - Lspsaga used for enhanced UI (hover, finder, code actions)
-- Trouble (`<leader>xx`) for a full diagnostics panel
+- Trouble is available through `:Trouble`

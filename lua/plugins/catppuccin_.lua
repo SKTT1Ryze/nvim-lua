@@ -70,7 +70,6 @@ function M:config()
       dap = { enabled = true, enable_ui = true },
       notify = true,
       symbols_outline = false,
-      coc_nvim = false,
       leap = false,
       neotree = { enabled = false, show_root = true, transparent_panel = false },
       telekasten = false,

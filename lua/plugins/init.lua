@@ -4,7 +4,8 @@ local M = {}
 function M:config()
   -- Bootstrap lazy.nvim
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  if not vim.loop.fs_stat(lazypath) then
+  local uv = vim.uv or vim.loop
+  if not uv.fs_stat(lazypath) then
     vim.fn.system({
       "git",
       "clone",
@@ -33,8 +34,8 @@ function M:config()
 
     -- File manager
     {
-      "kyazdani42/nvim-tree.lua",
-      dependencies = { "kyazdani42/nvim-web-devicons" },
+      "nvim-tree/nvim-tree.lua",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
       keys = {
         { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
         { "<leader>t", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in tree" },
@@ -109,7 +110,7 @@ function M:config()
     { "sainnhe/edge", lazy = true },
     { "arcticicestudio/nord-vim", lazy = true },
     { "morhetz/gruvbox", lazy = true },
-    { "kyoz/purify", lazy = true },
+    { "kyoz/purify", rtp = "vim", lazy = true },
     {
       "catppuccin/nvim",
       name = "catppuccin",
@@ -183,7 +184,7 @@ function M:config()
         vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
         local on_attach = function(client, bufnr)
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+          vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
           local bufopts = { noremap = true, silent = true, buffer = bufnr }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
@@ -215,12 +216,17 @@ function M:config()
             }
           },
         }
-        require('lspconfig')['tsserver'].setup {
+        require('lspconfig')['ts_ls'].setup {
           on_attach = on_attach,
           flags = lsp_flags,
           capabilities = capabilities,
         }
         require('lspconfig')['gopls'].setup {
+          on_attach = on_attach,
+          flags = lsp_flags,
+          capabilities = capabilities
+        }
+        require('lspconfig')['vimls'].setup {
           on_attach = on_attach,
           flags = lsp_flags,
           capabilities = capabilities
@@ -339,21 +345,16 @@ function M:config()
           }
         }
 
-        -- Diagnostic signs
-        local signs = {
-          { name = "DiagnosticSignError", text = "❌" },
-          { name = "DiagnosticSignWarn", text = "⚠️" },
-          { name = "DiagnosticSignHint", text = "💡" },
-          { name = "DiagnosticSignInfo", text = "🆕" },
-        }
-        for _, sign in ipairs(signs) do
-          vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-        end
-
-        -- Diagnostic handler
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        vim.diagnostic.config({
           virtual_text = { prefix = "", spacing = 0 },
-          signs = true,
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = "❌",
+              [vim.diagnostic.severity.WARN] = "⚠️",
+              [vim.diagnostic.severity.HINT] = "💡",
+              [vim.diagnostic.severity.INFO] = "🆕",
+            },
+          },
           underline = true,
         })
 
@@ -364,20 +365,19 @@ function M:config()
           local ok, notify = pcall(require, 'notify')
           if ok then
             notify(result.message, lvl, {
-              title = 'LSP | ' .. client.name,
+              title = 'LSP | ' .. (client and client.name or 'unknown'),
               timeout = 10000,
               keep = function() return false end,
             })
           else
             vim.notify(
-              string.format('[LSP | %s] %s', client.name, result.message),
+              string.format('[LSP | %s] %s', client and client.name or 'unknown', result.message),
               vim.log.levels[lvl]
             )
           end
         end
 
         -- Load additional LSP utilities
-        require("lsp.lsputils").config()
         require("lsp.lspsaga").config()
       end,
     },
@@ -397,18 +397,11 @@ function M:config()
         require("plugins.cmp").config()
       end,
     },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/cmp-vsnip" },
-    { "hrsh7th/vim-vsnip" },
     {
       "j-hui/fidget.nvim",
       event = "LspAttach",
       opts = {},
     },
-    { "onsails/lspkind.nvim" },
     {
       "glepnir/lspsaga.nvim",
       branch = "main",
@@ -418,8 +411,6 @@ function M:config()
         "nvim-treesitter/nvim-treesitter",
       },
     },
-    { "RishabhRD/popfix" },
-    { "RishabhRD/nvim-lsputils" },
 
     -- Terminal
     {
@@ -474,7 +465,7 @@ function M:config()
     {
       "folke/trouble.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
-      cmd = { "Trouble", "TroubleToggle" },
+      cmd = { "Trouble" },
       config = function()
         require("plugins.trouble_").config()
       end,

@@ -1,5 +1,4 @@
 local M = {}
-local map = vim.api.nvim_set_keymap
 
 function M:config()
   vim.g['Lf_WindowPosition'] = 'popup'
@@ -16,18 +15,18 @@ function M:config()
   -- map('n', '<leader>b', ':Buffers<CR>', {})
 
   local builtin = require('telescope.builtin')
-  vim.keymap.set('n', '<leader>f', builtin.find_files, {})
-  map('n', '<leader>r', ':Rg<CR>', { noremap = true })
-  vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+  vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Find files" })
+  vim.keymap.set('n', '<leader>r', builtin.live_grep, { desc = "Live grep" })
+  vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = "Find buffers" })
 
-  map('n', '<leader>F', ':Leaderf rg ', {})
+  vim.keymap.set('n', '<leader>F', ':Leaderf rg ', { desc = "LeaderF ripgrep" })
 
-  map('v', '<D-f>', 'y/<C-r>"<CR>', { noremap = true })
-  map('v', '<leader>f', '<Plug>LeaderfRgVisualLiteralNoBoundary<CR>', {
+  vim.keymap.set('v', '<D-f>', 'y/<C-r>"<CR>', { noremap = true })
+  vim.keymap.set('v', '<leader>f', '<Plug>LeaderfRgVisualLiteralNoBoundary<CR>', {
     noremap = true,
     unique = true
   })
-  map('v', '<leader>F', '<Plug>LeaderfRgVisualLiteralNoBoundary', {
+  vim.keymap.set('v', '<leader>F', '<Plug>LeaderfRgVisualLiteralNoBoundary', {
     noremap = true,
     unique = true
   })
