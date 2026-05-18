@@ -164,6 +164,7 @@ function M:config()
             "cssls",
             "dartls"  -- Dart LSP for Flutter development
           },
+          -- sourcekit-lsp is provided by the Swift/Xcode toolchain, not Mason.
           automatic_installation = false,  -- Disable automatic setup, we configure manually
         })
       end,
@@ -202,6 +203,19 @@ function M:config()
 
         local lsp_flags = { debounce_text_changes = 150 }
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local sourcekit_capabilities = vim.tbl_deep_extend("force", capabilities, {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+          textDocument = {
+            diagnostic = {
+              dynamicRegistration = true,
+              relatedDocumentSupport = true,
+            },
+          },
+        })
 
         -- Setup language servers
         require('lspconfig')['lua_ls'].setup {
@@ -343,6 +357,13 @@ function M:config()
               showTodos = true,
             }
           }
+        }
+        require('lspconfig')['sourcekit'].setup {
+          on_attach = on_attach,
+          flags = lsp_flags,
+          capabilities = sourcekit_capabilities,
+          cmd = { "sourcekit-lsp" },
+          filetypes = { "swift" },
         }
 
         vim.diagnostic.config({

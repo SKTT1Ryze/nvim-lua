@@ -1,6 +1,6 @@
 # Neovim Configuration
 
-Personal Neovim config centered on Rust development, with support for Go, TypeScript, C++, Lua, Dart, and CSS. Uses lazy.nvim for plugin management with a modular Lua structure.
+Personal Neovim config centered on Rust and Swift development, with support for Go, TypeScript, C++, Lua, Dart, and CSS. Uses lazy.nvim for plugin management with a modular Lua structure.
 
 ## Directory Structure
 
@@ -68,6 +68,7 @@ All LSP servers share a common `on_attach` callback defined in `lua/plugins/init
 | Lua | lua_ls |
 | CSS | cssls |
 | Dart | dartls |
+| Swift | sourcekit |
 | Vim script | vimls |
 
 **Rust-specific tuning (`lua/rust_config.lua`):**
@@ -76,6 +77,11 @@ All LSP servers share a common `on_attach` callback defined in `lua/plugins/init
 - Ignored proc macros: `async-trait`, `napi-derive`, `async-recursion`
 - Excluded dirs: `.direnv`, `node_modules`, `.git`
 - Inlay hints: chaining + parameter names enabled; type hints disabled
+
+**Swift LSP:**
+- `sourcekit` is configured directly through `nvim-lspconfig`
+- Uses `sourcekit-lsp` from the Swift/Xcode toolchain, not Mason
+- Limited to Swift buffers so C/C++ stays handled by `clangd`
 
 To add a new LSP server:
 1. Add the server name to `ensure_installed` in `lua/plugins/init.lua`
